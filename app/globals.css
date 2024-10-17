@@ -6,6 +6,10 @@ html,
 body,
 :root {
   height: 100%;
+  
+}
+textarea:focus, input:focus{
+  outline: none !important;
 }
 
 @layer utilities {

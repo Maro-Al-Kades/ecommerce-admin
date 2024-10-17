@@ -3,10 +3,11 @@ import "./globals.css";
 import { Tajawal } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ModalProvider } from "@/providers/modal-provider";
+import { ToasterProvider } from "@/providers/toast-provider";
 
 const font = Tajawal({
   subsets: ["arabic"],
-  weight: ["400", "500", "700", "900"],
+  weight: ["500", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -22,7 +23,8 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="ar" dir="rtl">
-        <body className={font.className}>
+        <body className={`${font.className} px-16`}>
+          <ToasterProvider />
           <ModalProvider />
           {children}
         </body>
