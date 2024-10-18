@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Tajawal } from "next/font/google";
+import NextTopLoader from 'nextjs-toploader';
 import { ClerkProvider } from "@clerk/nextjs";
 import { ModalProvider } from "@/providers/modal-provider";
 import { ToasterProvider } from "@/providers/toast-provider";
@@ -23,7 +24,9 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="ar" dir="rtl">
-        <body className={`${font.className} px-16`}>
+        <body className={`${font.className} px-3 lg:px-16`}>
+          <NextTopLoader />
+
           <ToasterProvider />
           <ModalProvider />
           {children}

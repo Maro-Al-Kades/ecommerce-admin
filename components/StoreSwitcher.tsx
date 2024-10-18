@@ -58,9 +58,9 @@ const StoreSwitcher = ({ className, items = [] }: StoreSwitcherProps) => {
           aria-label="اختر متجرا"
           className={cn("w-[200px] justify-between", className)}
         >
-          <StoreIcon className="ml-2 h-4 w-4 " />
+          <StoreIcon className="ml-2 h-4 w-4 text-primary" />
           {currentStore?.label}
-          <ChevronsUpDown className="mr-auto h-4 w-4 shrink-0 opacity-50 " />
+          <ChevronsUpDown className="mr-auto h-4 w-4 shrink-0 opacity-50 text-primary" />
         </Button>
       </PopoverTrigger>
 
@@ -68,7 +68,7 @@ const StoreSwitcher = ({ className, items = [] }: StoreSwitcherProps) => {
         <Command>
           <CommandList>
             <CommandInput placeholder="ابحث عن متجرك" />
-            <CommandEmpty>لم يتم ايجاد المتجر</CommandEmpty>
+            <CommandEmpty >لم يتم ايجاد المتجر</CommandEmpty>
 
             <CommandGroup heading="المتاجر الخاصة بك :">
               {formattedItems.map((store) => (
@@ -77,7 +77,7 @@ const StoreSwitcher = ({ className, items = [] }: StoreSwitcherProps) => {
                   onSelect={() => onStoreSelect(store)}
                   className="text-sm"
                 >
-                  <StoreIcon className="ml-2 h-4 w-4" />
+                  <StoreIcon className="ml-2 h-4 w-4 text-primary" />
                   {store.label}
 
                   <Check

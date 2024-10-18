@@ -1,18 +1,17 @@
-import Navbar from "@/components/shared/Navbar";
 import prismaDB from "@/lib/prismaDB";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import SettingsForm from "./components/SettingsForm";
 
-export default async function DashboardLayout({
-  children,
-  params,
-}: {
-  children: React.ReactNode;
+interface SettingsPageProps {
   params: {
     storeId: string;
   };
-}) {
+}
+
+const SettingsPage: React.FC<SettingsPageProps> = async ({ params }) => {
   const { userId } = auth();
+
   if (!userId) {
     redirect("/sign-in");
   }
@@ -20,18 +19,20 @@ export default async function DashboardLayout({
   const store = await prismaDB.store.findFirst({
     where: {
       id: params.storeId,
-      userId: userId,
+      userId,
     },
   });
 
   if (!store) {
     redirect("/");
   }
-
   return (
-    <main className="antialiased">
-      <Navbar />
-      {children}
-    </main>
+    <div className="flex-col ">
+      <div className="flex-1 space-y-4 space-y-reverse p-8 pt-6">
+        <SettingsForm initialData={store} />
+      </div>
+    </div>
   );
-}
+};
+
+export default SettingsPage;

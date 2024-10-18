@@ -13,7 +13,12 @@ const MainNav = ({
 
   const routes = [
     {
-      href: `/${params.storeId}/settigns`,
+      href: `/${params.storeId}`,
+      label: "لوحة التحكم",
+      active: pathname === `/${params.storeId}`,
+    },
+    {
+      href: `/${params.storeId}/settings`,
       label: "الاعدادات",
       active: pathname === `/${params.storeId}/settings`,
     },
@@ -32,7 +37,7 @@ const MainNav = ({
           className={cn(
             "text-sm font-medium transition-colors hover:text-primary",
             route.active
-              ? "text-black dark:text-white"
+              ? "text-primary font-semibold dark:text-white"
               : "text-muted-foreground"
           )}
         >
