@@ -1,6 +1,5 @@
 "use client";
 
-import { ApiAlert } from "@/components/ApiAlert";
 import AlertModal from "@/components/modals/alertModal";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,7 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { useOrigin } from "@/hooks/useOrigin";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Store } from "@prisma/client";
+import { Billboard } from "@prisma/client";
 import axios from "axios";
 import { Trash } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
@@ -25,30 +24,43 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { z } from "zod";
 
-interface SettingsFormProps {
-  initialData: Store;
+interface BillboardsFormProps {
+  initialData: Billboard | null;
 }
 
 const formSchema = z.object({
-  name: z.string().min(3, "يجب كتابة 3 احرف علي الأقل"),
+  label: z.string().min(3, "يجب كتابة 3 احرف علي الأقل"),
+  imageUrl: z.string().url("يجب كتابة عنوان صحيح"),
 });
 
-type SettingsFormValues = z.infer<typeof formSchema>;
+type BillboardsFormValues = z.infer<typeof formSchema>;
 
-const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
+const BillboardsForm: React.FC<BillboardsFormProps> = ({ initialData }) => {
   const params = useParams();
   const router = useRouter();
-  const origin = useOrigin();
 
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const form = useForm<SettingsFormValues>({
+  const title = initialData ? "تعديل اللوحة الاعلانية" : "اضافة لوحة اعلانية";
+  const description = initialData
+    ? "تعديل اللوحة الاعلانية"
+    : "اضافة لوحة اعلانية";
+  const toastMessage = initialData
+    ? "تم تعديل اللوحة الاعلانية"
+    : "تم انشاء اللوحة الاعلانية";
+
+  const action = initialData ? "حفظ التغييرات" : "اضافة";
+
+  const form = useForm<BillboardsFormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: initialData,
+    defaultValues: initialData || {
+      label: "",
+      imageUrl: "",
+    },
   });
 
-  const onSubmit = async (data: SettingsFormValues) => {
+  const onSubmit = async (data: BillboardsFormValues) => {
     try {
       setLoading(true);
 
@@ -88,17 +100,19 @@ const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
         loading={loading}
       />
       <div className="flex items-center justify-between">
-        <Heading title="الاعدادات" description="الاعدادات الخاصة بالمتجر...." />
+        <Heading title={title} description={description} />
 
-        <Button
-          variant="destructive"
-          size="sm"
-          onClick={() => setOpen(true)}
-          disabled={loading}
-          className="opacity-70 hover:opacity-100 transition-all duration-200"
-        >
-          <Trash className="h-4 w-4" />
-        </Button>
+        {initialData && (
+          <Button
+            variant="destructive"
+            size="sm"
+            onClick={() => setOpen(true)}
+            disabled={loading}
+            className="opacity-70 hover:opacity-100 transition-all duration-200"
+          >
+            <Trash className="h-4 w-4" />
+          </Button>
+        )}
       </div>
 
       <Separator style={{ margin: "15px 0" }} />
@@ -108,18 +122,19 @@ const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
           onSubmit={form.handleSubmit(onSubmit)}
           className="space-y-5 w-full"
         >
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 w-full gap-8">
             <FormField
               control={form.control}
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>اسم المتجر</FormLabel>
+                  <FormLabel>اسم اللوحة الاعلانية</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="قم بتغيير اسم المتجر من هنا..."
+                      placeholder="يمكنك اضافة اسم اللوحة الاعلانية هنا..."
                       disabled={loading}
                       {...field}
+                      
                     />
                   </FormControl>
                   <FormMessage />
@@ -129,20 +144,14 @@ const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
           </div>
 
           <Button disabled={loading} className="mr-auto" type="submit">
-            حفظ التغييرات
+            {action}
           </Button>
         </form>
       </Form>
 
       <Separator style={{ margin: "15px 0" }} />
-
-      <ApiAlert
-        title="NEXT_PUBLIC_API_URL"
-        description={`${origin}/api/${params.storeId}`}
-        variant="public"
-      />
     </>
   );
 };
 
-export default SettingsForm;
+export default BillboardsForm;
