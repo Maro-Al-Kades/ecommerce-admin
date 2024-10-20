@@ -1,8 +1,7 @@
 import prismaDB from "@/lib/prismaDB";
-import React from "react";
 import BillboardsForm from "./components/BillboardForm";
 
-const BillBoardPage = async ({
+const BillboardPage = async ({
   params,
 }: {
   params: { billboardId: string };
@@ -13,14 +12,13 @@ const BillBoardPage = async ({
     },
   });
 
-
   return (
-    <div className="flex-col">
-      <div className="flex-1 space-y-4 p-8 pt-6">
+    <main className="flex-col md:ml-56">
+      <section className="flex-1 p-8 pt-6 space-y-4">
         <BillboardsForm initialData={billboard} />
-      </div>
-    </div>
+      </section>
+    </main>
   );
 };
 
-export default BillBoardPage;
+export default BillboardPage;
