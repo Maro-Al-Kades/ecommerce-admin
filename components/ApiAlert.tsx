@@ -34,9 +34,9 @@ export const ApiAlert: React.FC<ApiAlertProps> = ({
   return (
     <Alert className="flex flex-col gap-4">
       <div className="flex flex-row items-center justify-end gap-2">
-        <AlertTitle className="flex items-center gap-x-2 font-semibold">
+        <AlertTitle className="flex items-center gap-x-2">
           <Badge variant={variantMap[variant]}>{textMap[variant]}</Badge>
-          {title}
+          <span className="font-bold">{title}</span>
         </AlertTitle>
         <Server className="h-4 w-4" />
       </div>
