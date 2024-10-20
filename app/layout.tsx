@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Tajawal } from "next/font/google";
-import NextTopLoader from 'nextjs-toploader';
+import NextTopLoader from "nextjs-toploader";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ModalProvider } from "@/providers/modal-provider";
 import { ToasterProvider } from "@/providers/toast-provider";
+import localFont from "next/font/local";
 
-const font = Tajawal({
-  subsets: ["arabic"],
-  weight: ["500", "700", "800", "900"],
+const FONT = localFont({
+  src: "./fonts/medium.otf",
 });
 
 export const metadata: Metadata = {
@@ -24,7 +24,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="ar" dir="rtl">
-        <body className={`${font.className} px-3 lg:px-16`}>
+        <body className={`${FONT.className} px-3 lg:px-16`}>
           <NextTopLoader />
 
           <ToasterProvider />

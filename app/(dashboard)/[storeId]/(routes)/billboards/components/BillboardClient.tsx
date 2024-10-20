@@ -3,10 +3,15 @@
 import { Button } from "@/components/ui/button";
 import Heading from "@/components/ui/Heading";
 import { Separator } from "@/components/ui/separator";
+import { Billboard } from "@prisma/client";
 import { Plus } from "lucide-react";
 import { useRouter, useParams } from "next/navigation";
 
-const BillboardClient = () => {
+interface BillboardClientProps {
+  data: Billboard[];
+}
+
+const BillboardClient: React.FC<BillboardClientProps> = ({ data }) => {
   const router = useRouter();
   const params = useParams();
 
@@ -14,7 +19,7 @@ const BillboardClient = () => {
     <>
       <div className="flex flex-col lg:flex-row gap-4 lg:gap-0 items-center justify-between">
         <Heading
-          title="اللوحات الاعلانية (0)"
+          title={`اللوحات الاعلانية (${data.length})`}
           description="ادارة اللوحات الاعلانية لمتجرك الالكتروني"
         />
 
