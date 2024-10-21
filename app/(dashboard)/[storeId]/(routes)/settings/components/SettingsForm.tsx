@@ -55,6 +55,7 @@ const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
       await axios.patch(`/api/stores/${params.storeId}`, data);
       router.refresh();
       toast.success("تم تحديث البيانات بنجاح");
+      router.push("/");
     } catch (error) {
       toast.error("حدث خطأ ما...");
     } finally {

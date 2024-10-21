@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import Heading from "@/components/ui/Heading";
 import { Separator } from "@/components/ui/separator";
 import { Billboard } from "@prisma/client";
-import { Plus, Server } from "lucide-react";
+import { Construction, Plus, Server } from "lucide-react";
 import { useRouter, useParams } from "next/navigation";
 import { BillboardColumn, columns } from "./columns";
 import { DataTable } from "@/components/ui/data-table";
@@ -29,8 +29,8 @@ const BillboardClient: React.FC<BillboardClientProps> = ({ data }) => {
         <Button
           onClick={() => router.push(`/${params.storeId}/billboards/new`)}
         >
-          اضافة لوحة
-          <Plus className="mr-2 h-4 w-4" />
+          اضافة لوحة جديدة
+          <Construction className="mr-2 h-4 w-4" />
         </Button>
       </div>
 

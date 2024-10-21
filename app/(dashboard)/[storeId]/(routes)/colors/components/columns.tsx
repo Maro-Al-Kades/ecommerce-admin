@@ -5,25 +5,31 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 import { CellAction } from "./cell-action";
 
-export type CategoryColumn = {
+export type ColorColumn = {
   id: string;
   name: string;
-  billboardLabel: string;
-  imageUrl: string;
+  value: string;
 };
 
-export const columns: ColumnDef<CategoryColumn>[] = [
+export const columns: ColumnDef<ColorColumn>[] = [
   {
     accessorKey: "name",
     header: "الاسم",
   },
-
   {
-    accessorKey: "billboard",
-    header: "اللوائح الاعلانية",
-    cell: ({ row }) => row.original.billboardLabel,
-  },
+    accessorKey: "value",
+    header: "اللون",
+    cell: ({ row }) => (
+      <div className="flex items-center gap-x-2 gap-x-reverse">
+        {/* {row.original.value} */}
 
+        <div
+          className="h-6 w-6 rounded-full border"
+          style={{ backgroundColor: row.original.value }}
+        />
+      </div>
+    ),
+  },
   {
     accessorKey: "createdAt",
     header: ({ column }) => (
@@ -36,7 +42,6 @@ export const columns: ColumnDef<CategoryColumn>[] = [
       </Button>
     ),
   },
-
   {
     header: "ادارة",
     id: "actions",

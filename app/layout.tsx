@@ -32,7 +32,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <NextTopLoader />
+            <NextTopLoader color="#F26969" />
 
             <ToasterProvider />
             <ModalProvider />
