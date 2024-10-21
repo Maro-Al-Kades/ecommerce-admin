@@ -5,6 +5,7 @@ import StoreSwitcher from "../StoreSwitcher";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import prismaDB from "@/lib/prismaDB";
+import { ThemeSwitcher } from "./ThemeSwitcher";
 
 const Navbar = async () => {
   const { userId } = auth();
@@ -24,7 +25,8 @@ const Navbar = async () => {
 
         <MainNav className="mx-6" />
 
-        <div className="mr-auto flex items-center space-x-4 space-y-reverse">
+        <div className="mr-auto flex items-center space-x-4 space-x-reverse">
+          <ThemeSwitcher />
           <UserButton afterSignOutUrl="/" />
         </div>
       </div>

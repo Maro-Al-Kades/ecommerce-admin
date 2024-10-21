@@ -45,7 +45,7 @@ const BillboardsForm: React.FC<BillboardsFormProps> = ({ initialData }) => {
   const title = initialData ? "تعديل اللوحة الاعلانية" : "اضافة لوحة اعلانية";
   const description = initialData
     ? "تعديل اللوحة الاعلانية"
-    : "اضافة لوحة اعلانية";
+    : "اضافة لوحة اعلانية جديدة الي متجرك الالكتروني";
   const toastMessage = initialData
     ? "تم تعديل اللوحة الاعلانية"
     : "تم انشاء اللوحة الاعلانية";
@@ -73,8 +73,8 @@ const BillboardsForm: React.FC<BillboardsFormProps> = ({ initialData }) => {
         await axios.post(`/api/${params.storeId}/billboards`, data);
       }
 
-      router.refresh();
       router.push(`/${params.storeId}/billboards`);
+      router.refresh();
       toast.success(toastMessage);
     } catch (error) {
       toast.error("حدث خطأ ما...");
@@ -90,8 +90,8 @@ const BillboardsForm: React.FC<BillboardsFormProps> = ({ initialData }) => {
       await axios.delete(
         `/api/${params.storeId}/billboards/${params.billboardId}`
       );
+      router.push(`/${params.storeId}/billboards`);
       router.refresh();
-      router.push("/");
 
       toast.success("تم حذف اللوحة بنجاح");
     } catch (error) {
@@ -172,13 +172,12 @@ const BillboardsForm: React.FC<BillboardsFormProps> = ({ initialData }) => {
             />
           </div>
 
-          <Button disabled={loading} className="mr-auto" type="submit">
+          <Button disabled={loading} className="mr-auto" type="submit" size={`lg`}>
             {action}
           </Button>
         </form>
       </Form>
 
-      <Separator style={{ margin: "15px 0" }} />
     </>
   );
 };

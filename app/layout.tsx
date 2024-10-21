@@ -6,6 +6,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { ModalProvider } from "@/providers/modal-provider";
 import { ToasterProvider } from "@/providers/toast-provider";
 import localFont from "next/font/local";
+import { ThemeProvider } from "@/providers/theme-provider";
 
 const FONT = localFont({
   src: "./fonts/medium.otf",
@@ -24,12 +25,19 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="ar" dir="rtl">
-        <body className={`${FONT.className} px-3 lg:px-16`}>
-          <NextTopLoader />
+        <body className={`${FONT.className} `}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <NextTopLoader />
 
-          <ToasterProvider />
-          <ModalProvider />
-          {children}
+            <ToasterProvider />
+            <ModalProvider />
+            {children}
+          </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>

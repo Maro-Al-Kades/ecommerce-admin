@@ -29,7 +29,7 @@ const AlertModal: React.FC<AlertModalProps> = ({
 
   return (
     <Modal
-      title="هل انت متأكد انك تريد حذف المتجر ؟"
+      title="هل انت متأكد انك تريد الحذف ؟"
       description="بمجرد التأكيد لا يمكنك التراجع عن هذه العملية."
       isOpen={isOpen}
       onClose={onClose}

@@ -6,18 +6,25 @@ import { ArrowUpDown } from "lucide-react";
 import { CellAction } from "./cell-action";
 import Image from "next/image";
 
-export type BillboardColumn = {
+export type CategoryColumn = {
   id: string;
-  label: string;
-  createdAt: string;
+  name: string;
+  billboardLabel: string;
   imageUrl: string;
 };
 
-export const columns: ColumnDef<BillboardColumn>[] = [
+export const columns: ColumnDef<CategoryColumn>[] = [
   {
-    accessorKey: "label",
+    accessorKey: "name",
     header: "الاسم",
   },
+
+  {
+    accessorKey: "billboard",
+    header: "اللوائح الاعلانية",
+    cell: ({ row }) => row.original.billboardLabel,
+  },
+
   {
     accessorKey: "createdAt",
     header: ({ column }) => (
@@ -30,6 +37,7 @@ export const columns: ColumnDef<BillboardColumn>[] = [
       </Button>
     ),
   },
+
   {
     header: "ادارة",
     id: "actions",

@@ -23,6 +23,11 @@ const MainNav = ({
       active: pathname === `/${params.storeId}/billboards`,
     },
     {
+      href: `/${params.storeId}/categories`,
+      label: "الأقسام",
+      active: pathname === `/${params.storeId}/categories`,
+    },
+    {
       href: `/${params.storeId}/settings`,
       label: "الاعدادات",
       active: pathname === `/${params.storeId}/settings`,
