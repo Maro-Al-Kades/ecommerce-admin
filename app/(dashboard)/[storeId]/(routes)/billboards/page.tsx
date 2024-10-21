@@ -1,5 +1,4 @@
 import { format } from "date-fns";
-
 import prismaDB from "@/lib/prismaDB";
 import BillboardClient from "./components/Client";
 import { BillboardColumn } from "./components/columns";
@@ -17,6 +16,7 @@ const BillBoardsPage = async ({ params }: { params: { storeId: string } }) => {
   const formattedBillboards: BillboardColumn[] = billboards.map((item) => ({
     id: item.id,
     label: item.label,
+    imageUrl: item.imageUrl || "", // تأكد من تضمين هذا الحقل
     createdAt: format(item.createdAt, "MMMM do, yyyy"),
   }));
 

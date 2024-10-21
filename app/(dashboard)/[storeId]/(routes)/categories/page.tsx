@@ -1,5 +1,4 @@
 import { format } from "date-fns";
-
 import prismaDB from "@/lib/prismaDB";
 import { CategoryColumn } from "./components/columns";
 import CategoryClient from "./components/Client";
@@ -21,6 +20,7 @@ const CategoriesPage = async ({ params }: { params: { storeId: string } }) => {
     id: item.id,
     name: item.name,
     billboardLabel: item.billboard.label,
+    imageUrl: item.billboard.imageUrl || "", // تعيين `imageUrl` بقيمة افتراضية إذا لم يكن موجودًا
     createdAt: format(item.createdAt, "MMMM do, yyyy"),
   }));
 
