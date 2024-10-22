@@ -38,6 +38,16 @@ const MainNav = ({
       active: pathname === `/${params.storeId}/colors`,
     },
     {
+      href: `/${params.storeId}/products`,
+      label: "المنتجات",
+      active: pathname === `/${params.storeId}/products`,
+    },
+    {
+      href: `/${params.storeId}/orders`,
+      label: "الطلبــات",
+      active: pathname === `/${params.storeId}/orders`,
+    },
+    {
       href: `/${params.storeId}/settings`,
       label: "الاعدادات",
       active: pathname === `/${params.storeId}/settings`,
