@@ -1,3 +1,4 @@
+// مثال كامل لمكون الطلبات
 import { format } from "date-fns";
 import prismaDB from "@/lib/prismaDB";
 import OrderClient from "./components/Client";
@@ -5,6 +6,8 @@ import { OrderColumn } from "./components/columns";
 import { formatter } from "@/lib/utils";
 
 const OrdersPage = async ({ params }: { params: { storeId: string } }) => {
+  console.log("Fetching orders for storeId:", params.storeId);
+
   const orders = await prismaDB.order.findMany({
     where: {
       storeId: params.storeId,
@@ -21,6 +24,8 @@ const OrdersPage = async ({ params }: { params: { storeId: string } }) => {
     },
   });
 
+  console.log("Orders fetched:", orders); // سجل الطلبات هنا
+
   const formattedOrders: OrderColumn[] = orders.map((item) => ({
     id: item.id,
     phone: item.phone,
@@ -36,6 +41,8 @@ const OrdersPage = async ({ params }: { params: { storeId: string } }) => {
     isPaid: item.isPaid,
     createdAt: format(item.createdAt, "MMMM do, yyyy"),
   }));
+
+  console.log("Formatted orders:", formattedOrders); // سجل الطلبات بعد التنسيق
 
   return (
     <div className="flex-col">

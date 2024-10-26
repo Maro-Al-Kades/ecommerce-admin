@@ -19,7 +19,7 @@ const OrderClientt: React.FC<OrderClienttProps> = ({ data }) => {
 
       <Separator style={{ margin: "15px 0" }} />
 
-      <DataTable searchKey="products" columns={columns} data={data} />
+      <DataTable searchKey="orders" columns={columns} data={data} />
     </>
   );
 };

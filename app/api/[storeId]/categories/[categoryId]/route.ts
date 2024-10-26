@@ -134,6 +134,10 @@ export async function GET(
       where: {
         id: params.categoryId,
       },
+      include: {
+        products: true,
+        billboard: true
+      },
     });
 
     return NextResponse.json({ message: "SUCCESS", category }, { status: 200 });
